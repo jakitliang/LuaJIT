@@ -12,6 +12,8 @@
 
 @if not defined INCLUDE goto :FAIL
 
+rc version.rc
+
 @setlocal
 @rem Add more debug flags here, e.g. DEBUGCFLAGS=/DLUA_USE_APICHECK
 @set DEBUGCFLAGS=
@@ -100,7 +102,7 @@ buildvm -m folddef -o lj_folddef.h lj_opt_fold.c
 @if "%1"=="static" goto :STATIC
 %LJCOMPILE% /MD /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
 @if errorlevel 1 goto :BAD
-%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj version.res
 @if errorlevel 1 goto :BAD
 @goto :MTDLL
 :STATIC
@@ -112,7 +114,7 @@ buildvm -m folddef -o lj_folddef.h lj_opt_fold.c
 :AMALGDLL
 %LJCOMPILE% /MD /DLUA_BUILD_AS_DLL ljamalg.c
 @if errorlevel 1 goto :BAD
-%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj version.res
 @if errorlevel 1 goto :BAD
 :MTDLL
 if exist %LJDLLNAME%.manifest^
@@ -120,7 +122,7 @@ if exist %LJDLLNAME%.manifest^
 
 %LJCOMPILE% luajit.c
 @if errorlevel 1 goto :BAD
-%LJLINK% /out:luajit.exe luajit.obj %LJLIBNAME%
+%LJLINK% /out:luajit.exe luajit.obj version.res %LJLIBNAME%
 @if errorlevel 1 goto :BAD
 if exist luajit.exe.manifest^
   %LJMT% -manifest luajit.exe.manifest -outputresource:luajit.exe
