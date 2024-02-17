@@ -11,3 +11,6 @@
 .tags
 *.res
 *.bak
+cmake-*
+.idea
+bin
