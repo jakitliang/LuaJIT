@@ -21,7 +21,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Windows")
             # arm
             set(DASMFLAGS -D WIN -D JIT -D FFI -D ENDIAN_LE -D FPU)
             set(DASC "${CMAKE_CURRENT_SOURCE_DIR}/src/vm_arm64.dasc")
-        endif ()
+        endif()
 
     elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
         # 32 bits

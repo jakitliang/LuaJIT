@@ -1,10 +1,15 @@
 
 add_executable(minilua minilua.c)
 
+set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../src)
+
+add_custom_target(
+        gen-version ALL
+        COMMAND if exist ..\\.git ( git show -s --format=%ct > ${SRC_DIR}/luajit_relver.txt ) else ( type ..\\.relver > ${SRC_DIR}/luajit_relver.txt )
+)
+
 add_custom_command(TARGET minilua POST_BUILD
         COMMAND ${MiniLua} ${DASM} -LN ${DASMFLAGS} -o host/buildvm_arch.h ${DASC}
-#        COMMAND if exist ..\\.git ( git show -s --format=%ct > ../src/luajit_relver.txt ) else ( type ..\\.relver > ../src/luajit_relver.txt )
-#        COMMAND ${MiniLua} ${DASM} -LN ${DASMFLAGS} -o ${DASC_OUT} ${DASC}
         COMMAND ${MiniLua} host/genversion.lua
         COMMENT "Generate version"
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/.."
@@ -28,8 +33,6 @@ add_custom_command(TARGET buildvm POST_BUILD
         COMMAND ${BuildVM} -m recdef -o lj_recdef.h ${ALL_LIB}
         COMMAND ${BuildVM} -m vmdef -o jit/vmdef.lua ${ALL_LIB}
         COMMAND ${BuildVM} -m folddef -o lj_folddef.h lj_opt_fold.c
-        #        COMMAND if exist ..\\.git ( git show -s --format=%ct > ../src/luajit_relver.txt ) else ( type ..\\.relver > ../src/luajit_relver.txt )
-        #        COMMAND ./src/host/minilua.exe ${DASM} -LN ${DASMFLAGS} -o ${DASC_OUT} ${DASC}
         COMMENT Generate definition
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/.."
         )

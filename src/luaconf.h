@@ -27,6 +27,7 @@
   ".\\?.lua;" LUAJIT_LDIR"?.lua;" LUAJIT_LDIR"?\\init.lua;" \
               LUA_LDIR"?.lua;"  LUA_LDIR"?\\init.lua;" \
               LUA_CDIR"?.lua;" LUA_CDIR"?\\init.lua"
+//#define LUA_PATH_DEFAULT \
 //  ".\\?.lua;" LUA_LDIR"?.lua;" LUA_LDIR"?\\init.lua;"
 #define LUA_CPATH_DEFAULT \
   ".\\?.dll;" LUA_CDIR"?.dll;" LUA_CDIR"loadall.dll"

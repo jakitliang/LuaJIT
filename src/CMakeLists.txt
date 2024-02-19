@@ -79,21 +79,10 @@ add_library(
         lj_udata.c
         lj_vmevent.c
         lj_vmmath.c
-        lib_aux.c
-        lib_base.c
-        lib_bit.c
-        lib_buffer.c
-        lib_debug.c
-        lib_ffi.c
-        lib_init.c
-        lib_io.c
-        lib_jit.c
-        lib_math.c
-        lib_os.c
-        lib_package.c
-        lib_string.c
-        lib_table.c
         lj_vm.o
+        lib_aux.c
+        lib_init.c
+        ${ALL_LIB}
         version.rc
 )
 target_compile_definitions(lua51 PUBLIC LUA_BUILD_AS_DLL)
