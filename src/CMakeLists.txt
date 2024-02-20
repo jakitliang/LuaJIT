@@ -79,7 +79,7 @@ add_library(
         lj_udata.c
         lj_vmevent.c
         lj_vmmath.c
-        lj_vm.o
+        ${CMAKE_BINARY_DIR}/src/lj_vm.obj
         lib_aux.c
         lib_init.c
         ${ALL_LIB}
@@ -91,7 +91,15 @@ target_include_directories(
         PUBLIC .
 )
 add_dependencies(lua51 buildvm)
+add_custom_command(
+        OUTPUT lj_vm.obj
+        COMMAND ${BuildVM} -m peobj -o ${CMAKE_BINARY_DIR}/src/lj_vm.obj
+        COMMENT Generate definition
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        )
 
 add_executable(luajit luajit.c version.rc)
 target_link_libraries(luajit lua51)
 add_dependencies(luajit lua51)
+
+install(TARGETS luajit lua51 DESTINATION bin)
