@@ -102,4 +102,43 @@ add_executable(luajit luajit.c version.rc)
 target_link_libraries(luajit lua51)
 add_dependencies(luajit lua51)
 
-install(TARGETS luajit lua51 DESTINATION bin)
+install(TARGETS luajit DESTINATION bin)
+install(TARGETS lua51
+        RUNTIME DESTINATION bin)
+install(TARGETS lua51
+        ARCHIVE DESTINATION lib)
+install(FILES
+        lauxlib.h
+        lua.h
+        lua.hpp
+        luaconf.h
+        luajit.h
+        lualib.h
+        DESTINATION include/luajit-2.1)
+#install(FILES
+#        ../etc/luajit.pc
+#        DESTINATION lib/pkgconfig)
+install(FILES
+        jit/bc.lua
+        jit/bcsave.lua
+        jit/dis_arm.lua
+        jit/dis_arm64.lua
+        jit/dis_arm64be.lua
+        jit/dis_mips.lua
+        jit/dis_mips64.lua
+        jit/dis_mips64el.lua
+        jit/dis_mips64r6.lua
+        jit/dis_mips64r6el.lua
+        jit/dis_mipsel.lua
+        jit/dis_ppc.lua
+        jit/dis_x64.lua
+        jit/dis_x86.lua
+        jit/dump.lua
+        jit/p.lua
+        jit/v.lua
+        jit/vmdef.lua
+        jit/zone.lua
+        DESTINATION share/luajit-2.1)
+install(FILES
+        ../etc/luajit.1
+        DESTINATION share/man/man1)

@@ -16,6 +16,7 @@ add_custom_command(TARGET minilua POST_BUILD
 list(
         APPEND minilua-list
         ${CMAKE_CURRENT_SOURCE_DIR}/../luajit_relver.txt
+        ${CMAKE_CURRENT_SOURCE_DIR}/../luajit.h
         ${CMAKE_CURRENT_SOURCE_DIR}/buildvm_arch.h
 )
 
@@ -55,5 +56,3 @@ set_property(
         TARGET buildvm
         APPEND
         PROPERTY ADDITIONAL_CLEAN_FILES ${buildvm-list})
-
-install()
