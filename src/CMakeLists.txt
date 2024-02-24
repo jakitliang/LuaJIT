@@ -138,7 +138,7 @@ install(FILES
         jit/v.lua
         jit/vmdef.lua
         jit/zone.lua
-        DESTINATION share/luajit-2.1)
+        DESTINATION share/luajit-2.1/jit)
 install(FILES
         ../etc/luajit.1
         DESTINATION share/man/man1)
